@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Purchase</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9VoWScsVZ2nmNHbIDq3wl584UiA6KLv9dzlDjmCjHI9DcRx3oVcQDItJ8y8OmG-tct9c&usqp=CAU'); /* Add your background image URL here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .product-listing {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+           height: 450px;
+         width: 250px; /* Set the width for all product boxes */
+            background-color: #fff;
+            
+        }
+
+        .product img {
+            max-width: 100%;
+            max-height:200px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            width: 60%;
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+
+        .rating {
+            color: #FFD700;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-listing">
+        <div class="product">
+            <img src="https://img6.gadgetsnow.com/gd/images/products/additional/large/G306168_View_1/mobiles/smartphones/apple-iphone-13-256-gb-red-4-gb-ram-.jpg" alt="Phone 1">
+            <h2>iPhone 13 Pro</h2>
+            <p>Model: iPhone 13 Pro</p>
+            <p>Description: Latest iPhone model, 128GB storage, Graphite color.</p>
+            <p>Price: $999</p>
+            <div class="rating">★★★★☆</div>
+            <button onclick="purchaseProduct('iPhone 13 Pro')">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="data:image/jpeg;base64,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" alt="Phone 2">
+            <h2>Samsung Galaxy S21 </h2>
+            <p>Model: Galaxy S21 Ultra</p>
+            <p>Description: 6.8-inch display, 128GB storage, Phantom Black color.</p>
+            <p>Price: $1,199</p>
+            <div class="rating">★★★★★</div>
+            <button onclick="purchaseProduct('Galaxy S21 Ultra')">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm38tPZHsPF-yoWwzGkP6QXvDUr5AFXOpLOki_S-cUxXV2icSda-XSrGkFdPEUNsW9y8Y&usqp=CAU" alt="Phone 3">
+            <h2>Google Pixel 6 Pro</h2>
+            <p>Model: Pixel 6 Pro</p>
+            <p>Description: 128GB storage, Sorta Sunny color, top-notch camera.</p>
+            <p>Price: $899</p>
+            <div class="rating">★★★★☆</div>
+            <button onclick="purchaseProduct('Pixel 6 Pro')">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="https://m.media-amazon.com/images/I/6175SlKKECL._SX679_.jpg" alt="Phone 4">
+            <h2>OnePlus 9 Pro</h2>
+            <p>Model: OnePlus 9 Pro</p>
+            <p>Description: 256GB storage, Morning Mist color, fast charging.</p>
+            <p>Price: $999</p>
+            <div class="rating">★★★★★</div>
+            <button onclick="purchaseProduct('OnePlus 9 Pro')">Buy Now</button>
+        </div>
+    </div>
+
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Enter your information</h2>
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="text" id="phone" placeholder="Your Phone Number (10 digits only)">
+            <label for="payment">Select Payment Method:</label>
+            <select id="payment">
+                <option value="credit_card">Credit Card</option>
+                <option value="debit_card">Debit Card</option>
+                <option value="paypal">PayPal</option>
+            </select>
+            <button onclick="confirmPurchase()">Confirm Purchase</button>
+        </div>
+    </div>
+
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <div id="cartItems"></div>
+    </div>
+
+    <script>
+        // JavaScript code
+        let selectedProduct = "";
+        let cart = [];
+
+        function purchaseProduct(productName) {
+            selectedProduct = productName;
+            document.getElementById("purchaseModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("purchaseModal").style.display = "none";
+        }
+
+        function confirmPurchase() {
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const paymentMethod = document.getElementById("payment").value;
+
+            if (!/^\d{10}$/.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            cart.push({ productName: selectedProduct, name, phone, paymentMethod });
+            updateCart();
+            alert(`${selectedProduct} has been ordered and reach you soon!`);
+            closeModal();
+        }
+
+        function updateCart() {
+            const cartItemsElement = document.getElementById("cartItems");
+            cartItemsElement.innerHTML = "";
+            cart.forEach(item => {
+                const cartItemElement = document.createElement("div");
+                cartItemElement.classList.add("cart-item");
+                cartItemElement.textContent = `Thanks You,${item.name} Your purchase of ${item.productName} is confirmed. You will be contacted at  ${item.phone} for payment via ${item.paymentMethod}`;                cartItemsElement.appendChild(cartItemElement);
+            });
+        }
+    </script>
+</body>
+</html>

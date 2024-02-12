@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Tech Haven Laptop Store</title>
+    <style>
+        /* Apply background image */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlrgECEhkJfY8n6QccgIiGZHhG2Joo_r27WA&usqp=CAU');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            color: #333; /* Default text color */
+            transition: background-color 0.5s ease; /* Add transition for background color */
+        }
+
+        /* Style the header with transitions */
+        h1 {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            width:100%;
+            transition: background-color 0.5s ease; /* Add transition for background color */
+        }
+
+        /* Style the main content */
+        main {
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Style product links with transitions */
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px; /* Adjust the size as needed */
+            /* Apply mixed colors using a gradient */
+            background: linear-gradient(to bottom, #ff00cc, #00ccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: color 0.3s ease; /* Add transition for color change */
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #280113; /* Change the text color on hover */
+        }
+
+        /* Style quotes with hover effect */
+        .quote {
+            font-style: italic;
+            font-size: 18px;
+            margin-bottom: 10px;
+            transition: font-size 0.3s ease; /* Add transition for font size change */
+        }
+
+        .quote:hover {
+            font-size: 20px; /* Increase font size on hover */
+        }
+
+        /* Style the logout button with transitions */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px 0;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add transitions for background color and text color */
+        }
+
+        .logout-button {
+            padding: 10px 20px;
+            background-color: #ff3333;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Add transitions for background color and transform */
+        }
+
+        .logout-button:hover {
+            background-color: #cc0000; /* Change background color on hover */
+            transform: scale(1.1); /* Add a slight scale effect on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to  Tech Haven Laptop Store</h1>
+    <main>
+        <p>Select an option:</p>
+        <div class="quote">
+            <blockquote>"The bitterness of poor quality remains long after the sweetness of low price is forgotten." - Benjamin Franklin</blockquote>
+        </div>
+        <ul>
+            <li><a href="lap.html">Buy</a></li>
+            <div class="quote">
+                <blockquote>"Sales go up and down. Service stays forever." - Unknown</blockquote>
+            </div>
+            <li><a href="selling.html">Sell</a></li>
+        </ul>
+    </main>
+    <footer>
+        <button class="logout-button" onclick="location.href='main.html'">Logout</button>
+    </footer>
+</body>
+</html>
